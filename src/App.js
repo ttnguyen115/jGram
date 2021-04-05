@@ -1,19 +1,23 @@
+import { Box } from '@material-ui/core';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
+import NotFoundFeature from './components/NotFound';
 import PostFeature from './components/PostFeature';
-import { Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
+    <Box className="App">
       <Header />
 
       <Switch>
         <Route to="/" component={ PostFeature } exact />
+
+        <Route component={ NotFoundFeature } exact />
       </Switch>
 
       {/* <Footer />  */}
-    </div>
+    </Box>
   );
 }
 
