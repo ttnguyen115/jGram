@@ -1,6 +1,7 @@
 import { Box, Container, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import postApi from '../../../api/postApi';
+import { db } from '../../../database/firebase';
 import PostList from '../components/PostList';
 import PostSkeleton from '../components/PostSkeleton';
 
@@ -23,6 +24,7 @@ function HomePage(props) {
     const [loading, setLoading] = useState(true);
     const [postList, setPostList] = useState([]);
 
+    // Fetch temp data from JSONPlaceholder
     useEffect(() => {
         (async () => {
             try {
@@ -33,6 +35,13 @@ function HomePage(props) {
             }
 
             setLoading(false);
+        })();
+    }, []);
+
+    // Fetch realtime data from Firebase officially
+    useEffect(() => {
+        (async () => {
+            db.collection('posts').onSnapshot(snapshot => {})
         })();
     }, []);
 
