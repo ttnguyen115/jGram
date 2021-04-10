@@ -1,10 +1,12 @@
-import { IconButton, InputBase, makeStyles, Menu, MenuItem } from '@material-ui/core';
+import { Button, IconButton, InputBase, makeStyles, Menu, MenuItem, Modal } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+import React, { useState } from 'react';
+import SignUpFeature from '../../auth/components/SignUpFeature';
+import { auth } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
 
 Header.propTypes = {};
@@ -67,15 +69,20 @@ const useStyles = makeStyles(theme => ({
 
 function Header(props) {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+    const [open, setOpen] = useState(false);
+    // const [anchorEl, setAnchorEl] = useState(null);
+    // const open = Boolean(anchorEl);
     
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // };
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
+    // const handleMenu = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
+
+    const handleClickOpen = () => {
+        setOpen(true);
     };
 
     return (
@@ -94,7 +101,9 @@ function Header(props) {
                 />
             </div>
 
-            <Box className={classes.iconsContainer}>
+            {/* Icons Bar (Notifications - Message - User Settings) */}
+
+            {/* <Box className={classes.iconsContainer}>
                 <IconButton>
                     <FavoriteBorderIcon  className={classes.icons}/>
                 </IconButton>
@@ -131,7 +140,26 @@ function Header(props) {
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleClose}>My account</MenuItem>
                 </Menu>
-            </Box>
+            </Box> */}
+
+            {/* Sign up / Log in */}
+            {username ? (
+                <Button color="inherit" onClick={() => auth.signOut()}>Log Out</Button>
+            ) : (
+                <Box>
+                    <Button color="inherit" onClick={handleClickOpen}>Sign Up</Button>
+                    <Button color="inherit" onClick={handleClickOpen}>Log In</Button>
+                </Box>
+            )}
+
+            <Modal
+                open={open}
+                onClose={() => setOpen(false)}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <SignUpFeature />
+            </Modal>
         </Box>
     );
 }

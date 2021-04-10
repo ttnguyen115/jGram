@@ -7,7 +7,7 @@
 
 import firebase from 'firebase';
 
-const firebaseApp = firebase.initializingApp({
+const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyD9tl_zR3jilA9vKcMzV6nY6tZi97iLmJg",
     authDomain: "jgram-ad357.firebaseapp.com",
     databaseURL: "https://jgram-ad357-default-rtdb.firebaseio.com",

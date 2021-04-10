@@ -37,11 +37,17 @@ const useStyles = makeStyles(theme => ({
     postTitle: {
         fontWeight: 'bold',
         fontSize: '20px',
+        textAlign: 'left',
+        paddingLeft: '1em',
     },
     
     postBody: {
-        padding: '1em',
+        padding: '0 1em',
         textAlign: 'left',
+
+        '& > img': {
+            width: '100%',
+        }
     },
 
     postReact: {
@@ -60,12 +66,14 @@ function Post({post}) {
                     <Box>
                         <Box className={classes.postHeader}>
                             <Avatar src="/static/images/avatar/1.jpg" className={classes.icon} />
-                            <Typography className={classes.userName}>{post.userId}</Typography>
+                            <Typography className={classes.userName}>{post.username}</Typography>
                         </Box>
 
-                        <Box className={classes.postTitle}>{post.title}</Box>
+                        <Box className={classes.postBody}>
+                            <img src={post.imageUrl} alt={post.caption} />
+                        </Box>
 
-                        <Box className={classes.postBody}>{post.body}</Box>
+                        <Box className={classes.postTitle}>{post.caption}</Box>
 
                         <Box className={classes.postReact}>
                             <IconButton>

@@ -25,7 +25,7 @@ function PostList({data = []}) {
         <Box className={classes.root}>
             <Container className={classes.container} maxWidth="md" >
 
-                { data.map(post => (<Post key={post.id} post={post} />)) }
+                { data.map(({id, post}) => (<Post key={id} post={post} />)) }
 
             </Container>
         </Box>
