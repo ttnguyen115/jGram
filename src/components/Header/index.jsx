@@ -70,16 +70,16 @@ const useStyles = makeStyles(theme => ({
 function Header(props) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
-    // const [anchorEl, setAnchorEl] = useState(null);
-    // const open = Boolean(anchorEl);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
     
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    // };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-    // const handleMenu = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    // };
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -102,49 +102,48 @@ function Header(props) {
             </div>
 
             {/* Icons Bar (Notifications - Message - User Settings) */}
-
-            {/* <Box className={classes.iconsContainer}>
-                <IconButton>
-                    <FavoriteBorderIcon  className={classes.icons}/>
-                </IconButton>
-
-
-                <IconButton>
-                    <ChatBubbleOutlineIcon  className={classes.icons}/>
-                </IconButton>
-
-                <IconButton
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleMenu}
-                    color="inherit"
-                >
-                    <AccountCircleIcon  className={classes.icons}/>
-                </IconButton>
-                <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    open={open}
-                    onClose={handleClose}
-                >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Menu>
-            </Box> */}
-
-            {/* Sign up / Log in */}
             {username ? (
-                <Button color="inherit" onClick={() => auth.signOut()}>Log Out</Button>
+                <Box className={classes.iconsContainer}>
+                    <IconButton>
+                        <FavoriteBorderIcon  className={classes.icons}/>
+                    </IconButton>
+
+
+                    <IconButton>
+                        <ChatBubbleOutlineIcon  className={classes.icons}/>
+                    </IconButton>
+
+                    <IconButton
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleMenu}
+                        color="inherit"
+                    >
+                        <AccountCircleIcon  className={classes.icons}/>
+                    </IconButton>
+
+                    <Button color="inherit" onClick={() => auth.signOut()}>Log Out</Button>
+                
+                    <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={open}
+                        onClose={handleClose}
+                    >
+                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                    </Menu>
+                </Box>
             ) : (
                 <Box>
                     <Button color="inherit" onClick={handleClickOpen}>Sign Up</Button>
