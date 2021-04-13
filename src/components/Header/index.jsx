@@ -69,16 +69,16 @@ const useStyles = makeStyles(theme => ({
 function Header({userCurrent}) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
-    // const [anchorEl, setAnchorEl] = useState(null);
-    // const open = Boolean(anchorEl);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
     
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    // };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-    // const handleMenu = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    // };
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
