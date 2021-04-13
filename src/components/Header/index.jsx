@@ -1,15 +1,14 @@
-import { Button, IconButton, InputBase, makeStyles, Menu, MenuItem, Modal } from '@material-ui/core';
+import { Button, InputBase, makeStyles, Modal } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import SearchIcon from '@material-ui/icons/Search';
-import React, { useState } from 'react';
+import { default as PropTypes, default as React, useState } from 'react';
 import SignUpFeature from '../../auth/components/SignUpFeature';
 import { auth } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
 
-Header.propTypes = {};
+Header.propTypes = {
+    userCurrent: PropTypes.object,
+};
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -67,7 +66,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Header(props) {
+function Header({userCurrent}) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     // const [anchorEl, setAnchorEl] = useState(null);
@@ -143,7 +142,7 @@ function Header(props) {
             </Box> */}
 
             {/* Sign up / Log in */}
-            {username ? (
+            {userCurrent ? (
                 <Button color="inherit" onClick={() => auth.signOut()}>Log Out</Button>
             ) : (
                 <Box>

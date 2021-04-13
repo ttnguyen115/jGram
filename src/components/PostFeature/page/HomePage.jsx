@@ -1,6 +1,7 @@
 import { Box, Container, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { auth, db } from '../../../database/firebase';
+import Header from '../../Header';
 import PostList from '../components/PostList';
 import PostSkeleton from '../components/PostSkeleton';
 
@@ -73,10 +74,11 @@ function HomePage(props) {
         return () => {
             unsubscribe();
         }
-    }, [user]);
+    }, []);
 
     return (
         <Box className={classes.root}>
+            {/* <Header userCurrent={user} />  */}
             <Container className={classes.container} maxWidth="md" >
 
                 {loading ? <PostSkeleton num={3} /> : <PostList data={postList}/> }

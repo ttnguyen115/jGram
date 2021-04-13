@@ -8,6 +8,7 @@ import PostFeature from './components/PostFeature';
 function App() {
   return (
     <Box className="App">
+      {/* <Header userCurrent={user} /> */}
       <Header />
 
       <Switch>
