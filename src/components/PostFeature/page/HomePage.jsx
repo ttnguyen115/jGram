@@ -74,7 +74,7 @@ function HomePage(props) {
         return () => {
             unsubscribe();
         }
-    }, []);
+    }, [user]);
 
     return (
         <Box className={classes.root}>
