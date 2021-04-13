@@ -1,14 +1,13 @@
 import { Button, InputBase, makeStyles, Modal } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
-import { default as PropTypes, default as React, useState } from 'react';
+import { default as React, useEffect, useState } from 'react';
+import LogInFeature from '../../auth/components/LogInFeature';
 import SignUpFeature from '../../auth/components/SignUpFeature';
 import { auth } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
 
-Header.propTypes = {
-    userCurrent: PropTypes.object,
-};
+Header.propTypes = {};
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -66,23 +65,47 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Header({userCurrent}) {
+function Header(props) {
     const classes = useStyles();
-    const [open, setOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+    const [signUp, setSignUp] = useState(false);
+    const [logIn, setLogIn] = useState(false);
+    const [user, setUser] = useState(null);
+
+    // const [anchorEl, setAnchorEl] = useState(null);
+    // const open = Boolean(anchorEl);
     
-    const handleClose = () => {
-        setAnchorEl(null);
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // };
+
+    // const handleMenu = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
+
+    const handleSignUpClick = () => {
+        setSignUp(true);
     };
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleLogInClick = () => {
+        setLogIn(true);
     };
+    
+    // Log in or Sign up
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+            if (authUser) {
+                // If user log in
+                setUser(authUser);
+            } else {
+                // If user log out
+                setUser(null);
+            }
+        });
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+        return () => {
+            unsubscribe();
+        }
+    }, [user]);
 
     return (
         <Box className={classes.root}>
@@ -142,22 +165,31 @@ function Header({userCurrent}) {
             </Box> */}
 
             {/* Sign up / Log in */}
-            {userCurrent ? (
+            {user ? (
                 <Button color="inherit" onClick={() => auth.signOut()}>Log Out</Button>
             ) : (
                 <Box>
-                    <Button color="inherit" onClick={handleClickOpen}>Sign Up</Button>
-                    <Button color="inherit" onClick={handleClickOpen}>Log In</Button>
+                    <Button color="inherit" onClick={handleSignUpClick}>Sign Up</Button>
+                    <Button color="inherit" onClick={handleLogInClick}>Log In</Button>
                 </Box>
             )}
 
             <Modal
-                open={open}
-                onClose={() => setOpen(false)}
+                open={signUp}
+                onClose={() => setSignUp(false)}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
                 <SignUpFeature />
+            </Modal>
+
+            <Modal
+                open={logIn}
+                onClose={() => setLogIn(false)}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <LogInFeature />
             </Modal>
         </Box>
     );

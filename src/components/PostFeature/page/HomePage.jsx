@@ -1,7 +1,6 @@
 import { Box, Container, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { auth, db } from '../../../database/firebase';
-import Header from '../../Header';
+import { db } from '../../../database/firebase';
 import PostList from '../components/PostList';
 import PostSkeleton from '../components/PostSkeleton';
 
@@ -23,21 +22,8 @@ function HomePage(props) {
     const classes = useStyles();
     const [loading, setLoading] = useState(true);
     const [postList, setPostList] = useState([]);
-    const [user, setUser] = useState(null);
 
-    // Fetch temp data from JSONPlaceholder
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const collection = await postApi.getAll();
-    //             setPostList(collection.data);
-    //         } catch (err) {
-    //             console.log('Failed to fetch data: ', err);
-    //         }
-
-    //         setLoading(false);
-    //     })();
-    // }, []);
+    // const { userState } = useUserState(user);
 
     // Fetch realtime data from Firebase officially
     useEffect(() => {
@@ -57,31 +43,12 @@ function HomePage(props) {
         })();
     }, []);
 
-    // Log in or Sign up
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                // If user log in
-                console.log(authUser);
-                setUser(authUser);
-
-            } else {
-                // If user log out
-                setUser(null);
-            }
-        });
-
-        return () => {
-            unsubscribe();
-        }
-    }, [user]);
-
     return (
         <Box className={classes.root}>
             {/* <Header userCurrent={user} />  */}
             <Container className={classes.container} maxWidth="md" >
 
-                {loading ? <PostSkeleton num={3} /> : <PostList data={postList}/> }
+                {loading ? <PostSkeleton /> : <PostList data={postList}/> }
 
             </Container>
         </Box>

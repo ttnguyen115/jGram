@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { auth } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png'
 
-SignUpFeature.propTypes = {};
+LogInFeature.propTypes = {};
 
 function getModalStyle() {
     const top = 50;
@@ -35,47 +35,32 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto',
     },
     
-    signup: {
+    login: {
         display: 'flex',
         flexDirection: 'column',
     }
 
 }));
 
-function SignUpFeature(props) {
+function LogInFeature(props) {
     const classes = useStyles();
     const [modalStyle] = useState(getModalStyle);
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignUp = (e) => {
+    const handleLogIn = (e) => {
         e.preventDefault();
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .then((authUser) => {
-                return authUser.user.updateProfile({
-                    displayName: username,
-                })
-            })
-            .catch(err => alert('Error message: ', err));
-
-        
+        auth.signInWithEmailAndPassword(email, password)
+            .catch((err) =>  alert('Error message: ', err));
     }
 
     return (
         <Box>
             <div className={classes.paper} style={modalStyle} >
                 <center>
-                    <form className={classes.signup}>
+                    <form className={classes.login}>
                         <img className={classes.img} src={jgramLogo} alt="jGram-logo"/>
-
-                        <Input 
-                            placeholder="Username"
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
 
                         <Input 
                             placeholder="Email"
@@ -91,8 +76,8 @@ function SignUpFeature(props) {
                             onChange={(e) => setPassword(e.target.value)}
                         />
 
-                        <Button type="submit " onClick={handleSignUp}>
-                            Sign Up
+                        <Button type="submit " onClick={handleLogIn}>
+                            Log In
                         </Button>
                     </form>
                 </center>
@@ -101,4 +86,4 @@ function SignUpFeature(props) {
     );
 };
 
-export default SignUpFeature;
+export default LogInFeature;
