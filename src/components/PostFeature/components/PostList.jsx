@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         textAlign: 'center',
-        marginTop: '70px',
     },
     
     progress: {
@@ -22,7 +21,7 @@ function PostList({data = []}) {
     const classes = useStyles();
 
     return (
-        <Box className={classes.root}>
+        <Box className={classes.root} >
             <Container className={classes.container} maxWidth="md" >
 
                 { data.map(({id, post}) => (<Post key={id} post={post} />)) }

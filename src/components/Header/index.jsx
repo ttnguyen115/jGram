@@ -104,6 +104,7 @@ function Header(props) {
             if (authUser) {
                 // If user log in
                 setUser(authUser);
+                console.log(user.displayName);
             } else {
                 // If user log out
                 setUser(null);

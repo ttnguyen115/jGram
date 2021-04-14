@@ -1,6 +1,8 @@
 import { Box, Container, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../database/firebase';
+import Header from '../../Header';
+import UploadPost from '../../UploadFeature/UploadPost';
 import PostList from '../components/PostList';
 import PostSkeleton from '../components/PostSkeleton';
 
@@ -10,7 +12,12 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         textAlign: 'center',
-        marginTop: '70px',
+    },
+    
+    container: {
+        width: '100%',
+        position: 'absolute',
+        margin: '70px auto',
     },
     
     progress: {
@@ -45,8 +52,9 @@ function HomePage(props) {
 
     return (
         <Box className={classes.root}>
-            {/* <Header userCurrent={user} />  */}
-            <Container className={classes.container} maxWidth="md" >
+            <Header className={classes.header} />
+            <UploadPost  /> 
+            <Container className={classes.container} maxWidth="md">
 
                 {loading ? <PostSkeleton /> : <PostList data={postList}/> }
 

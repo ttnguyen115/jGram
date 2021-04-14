@@ -1,8 +1,9 @@
 import { Box, Button, Input, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
-import { auth } from '../../database/firebase';
+import { auth, db } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 LogInFeature.propTypes = {
     closeModal: PropTypes.func,
@@ -55,12 +56,24 @@ function LogInFeature(props) {
         e.preventDefault();
 
         auth.signInWithEmailAndPassword(email, password)
+            // .then((email) => {
+            //     db.collection('users').onSnapshot(snapshot => {
+            //         snapshot.docs.map(doc => ({
+            //             id: doc.id,
+            //             email: doc.email,
+            //             username: doc.username
+            //         }));
+            //         console.log(email);
+            //         // return setUsername(username);
+            //     })
+            // })
             .catch((err) =>  alert('Error message: ', err));
-
+        
         const {closeModal} = props;
         if (closeModal) {
             closeModal();
         }
+
     }
 
     return (
@@ -83,11 +96,6 @@ function LogInFeature(props) {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-
-                        {/* <Button type="submit " onClick={() => {
-                            handleLogIn();
-                            props.open(false);
-                        }}> */}
                         
                         <Button type="submit" onClick={handleLogIn} >
                             Log In

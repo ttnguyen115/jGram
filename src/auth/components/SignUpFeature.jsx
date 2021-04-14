@@ -1,6 +1,6 @@
 import { Box, Button, Input, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
-import { auth } from '../../database/firebase';
+import firebase, { auth, db, storage } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
 import PropTypes from 'prop-types';
 
@@ -57,12 +57,18 @@ function SignUpFeature(props) {
 
         auth.createUserWithEmailAndPassword(email, password)
             .then((authUser) => {
+                db.collection('users').add({
+                    email: email,
+                    username: username,
+                });
+
                 return authUser.user.updateProfile({
                     displayName: username,
                 })
             })
             .catch(err => alert('Error message: ', err));
-        
+
+
         const {closeModal} = props;
         if (closeModal) {
             closeModal();

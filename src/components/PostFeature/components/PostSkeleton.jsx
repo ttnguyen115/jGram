@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 345,
       margin: theme.spacing(2),
     },
+    
     media: {
       height: 190,
     },
