@@ -1,9 +1,12 @@
 import { Box, Button, Input, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { auth } from '../../database/firebase';
-import jgramLogo from '../../jgramLogo.png'
+import jgramLogo from '../../jgramLogo.png';
+import PropTypes from 'prop-types';
 
-SignUpFeature.propTypes = {};
+SignUpFeature.propTypes = {
+    loseModal: PropTypes.func,
+};
 
 function getModalStyle() {
     const top = 50;
@@ -59,8 +62,11 @@ function SignUpFeature(props) {
                 })
             })
             .catch(err => alert('Error message: ', err));
-
         
+        const {closeModal} = props;
+        if (closeModal) {
+            closeModal();
+        }
     }
 
     return (

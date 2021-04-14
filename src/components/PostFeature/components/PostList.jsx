@@ -1,5 +1,5 @@
 import { Box, Container, makeStyles } from '@material-ui/core';
-import { default as PropTypes, default as React } from 'react';
+import { default as PropTypes, default as React } from 'prop-types';
 import Post from '../components/Post';
 
 PostList.propTypes = {

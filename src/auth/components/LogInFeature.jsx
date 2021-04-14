@@ -1,9 +1,12 @@
 import { Box, Button, Input, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { auth } from '../../database/firebase';
-import jgramLogo from '../../jgramLogo.png'
+import jgramLogo from '../../jgramLogo.png';
+import PropTypes from 'prop-types';
 
-LogInFeature.propTypes = {};
+LogInFeature.propTypes = {
+    closeModal: PropTypes.func,
+};
 
 function getModalStyle() {
     const top = 50;
@@ -53,6 +56,11 @@ function LogInFeature(props) {
 
         auth.signInWithEmailAndPassword(email, password)
             .catch((err) =>  alert('Error message: ', err));
+
+        const {closeModal} = props;
+        if (closeModal) {
+            closeModal();
+        }
     }
 
     return (
@@ -76,7 +84,12 @@ function LogInFeature(props) {
                             onChange={(e) => setPassword(e.target.value)}
                         />
 
-                        <Button type="submit " onClick={handleLogIn}>
+                        {/* <Button type="submit " onClick={() => {
+                            handleLogIn();
+                            props.open(false);
+                        }}> */}
+                        
+                        <Button type="submit" onClick={handleLogIn} >
                             Log In
                         </Button>
                     </form>

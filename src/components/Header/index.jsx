@@ -86,8 +86,16 @@ function Header(props) {
         setSignUp(true);
     };
 
+    const handleSignUpClose = () => {
+        setSignUp(false);
+    };
+
     const handleLogInClick = () => {
         setLogIn(true);
+    };
+
+    const handleLogInClose = () => {
+        setLogIn(false);
     };
     
     // Log in or Sign up
@@ -180,7 +188,7 @@ function Header(props) {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <SignUpFeature />
+                <SignUpFeature closeModal={handleSignUpClose} />
             </Modal>
 
             <Modal
@@ -189,7 +197,7 @@ function Header(props) {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <LogInFeature />
+                <LogInFeature closeModal={handleLogInClose} />
             </Modal>
         </Box>
     );
