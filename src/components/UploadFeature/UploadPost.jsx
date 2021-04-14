@@ -79,6 +79,7 @@ function UploadPost(props) {
         <div className={classes.root}>
             <input type="text" placeholder="Enter your caption here..." onChange={e => setCaption(e.target.value)} />
             <input type="file" onChange={handleChange} />
+            <div>{progress}</div>
 
             <Button className={classes.uploadBtn} onClick={handleUpload}>
                 Upload

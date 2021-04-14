@@ -1,8 +1,8 @@
 import { Box, Button, Input, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
-import firebase, { auth, db, storage } from '../../database/firebase';
-import jgramLogo from '../../jgramLogo.png';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { auth, db } from '../../database/firebase';
+import jgramLogo from '../../jgramLogo.png';
 
 SignUpFeature.propTypes = {
     loseModal: PropTypes.func,

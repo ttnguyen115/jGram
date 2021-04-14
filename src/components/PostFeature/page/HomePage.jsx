@@ -18,6 +18,8 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         position: 'absolute',
         margin: '70px auto',
+        left: 0,
+        right: 0,
     },
     
     progress: {

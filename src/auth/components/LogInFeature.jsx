@@ -1,9 +1,8 @@
 import { Box, Button, Input, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
-import { auth, db } from '../../database/firebase';
+import { auth } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
 
 LogInFeature.propTypes = {
     closeModal: PropTypes.func,
