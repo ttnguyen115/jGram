@@ -31,8 +31,11 @@ function HomePage(props) {
     const classes = useStyles();
     const [loading, setLoading] = useState(true);
     const [postList, setPostList] = useState([]);
+    const [username, setUsername] = useState('');
 
-    // const { userState } = useUserState(user);
+    const handleDisplayUsername = (name) => {
+        setUsername(name);
+    };
 
     // Fetch realtime data from Firebase officially
     useEffect(() => {
@@ -54,8 +57,8 @@ function HomePage(props) {
 
     return (
         <Box className={classes.root}>
-            <Header className={classes.header} />
-            <UploadPost  /> 
+            <Header className={classes.header} displayUsername={handleDisplayUsername} />
+            <UploadPost username={username} /> 
             <Container className={classes.container} maxWidth="md">
 
                 {loading ? <PostSkeleton /> : <PostList data={postList}/> }

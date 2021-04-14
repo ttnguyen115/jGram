@@ -1,8 +1,11 @@
 import { Button, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import firebase, { storage, db } from '../../database/firebase';
+import PropTypes from 'prop-types';
 
-UploadPost.propTypes = {};
+UploadPost.propTypes = {
+    username: PropTypes.string,
+};
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function UploadPost(props) {
+function UploadPost({username}) {
     const classes = useStyles();
     const [caption, setCaption] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -67,7 +70,7 @@ function UploadPost(props) {
                                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                                 caption: caption,
                                 imageUrl: url,
-                                // username: username,
+                                username: username,
                             })
 
                         })

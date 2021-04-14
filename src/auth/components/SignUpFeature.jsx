@@ -5,7 +5,7 @@ import { auth, db } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
 
 SignUpFeature.propTypes = {
-    loseModal: PropTypes.func,
+    closeModal: PropTypes.func,
 };
 
 function getModalStyle() {

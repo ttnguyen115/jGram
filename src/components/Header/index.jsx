@@ -6,8 +6,11 @@ import LogInFeature from '../../auth/components/LogInFeature';
 import SignUpFeature from '../../auth/components/SignUpFeature';
 import { auth } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
+import PropTypes from 'prop-types';
 
-Header.propTypes = {};
+Header.propTypes = {
+    displayUsername: PropTypes.func,
+};
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -70,6 +73,7 @@ function Header(props) {
     const [signUp, setSignUp] = useState(false);
     const [logIn, setLogIn] = useState(false);
     const [user, setUser] = useState(null);
+    const [username, setUsername] = useState('');
 
     // const [anchorEl, setAnchorEl] = useState(null);
     // const open = Boolean(anchorEl);
@@ -95,6 +99,11 @@ function Header(props) {
     };
 
     const handleLogInClose = () => {
+        const {displayUsername} = props;
+        if (displayUsername) {
+            displayUsername(username);
+        }
+
         setLogIn(false);
     };
     
@@ -104,7 +113,8 @@ function Header(props) {
             if (authUser) {
                 // If user log in
                 setUser(authUser);
-                console.log(user.displayName);
+                setUsername(authUser.displayName);
+                console.log(username);
             } else {
                 // If user log out
                 setUser(null);
@@ -114,7 +124,7 @@ function Header(props) {
         return () => {
             unsubscribe();
         }
-    }, [user]);
+    }, [user, username]);
 
     return (
         <Box className={classes.root}>
