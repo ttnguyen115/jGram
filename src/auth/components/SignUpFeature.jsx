@@ -68,7 +68,6 @@ function SignUpFeature(props) {
             })
             .catch(err => alert('Error message: ', err));
 
-
         const {closeModal} = props;
         if (closeModal) {
             closeModal();

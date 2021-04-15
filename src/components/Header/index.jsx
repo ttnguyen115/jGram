@@ -1,7 +1,7 @@
 import { Button, InputBase, makeStyles, Modal } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
-import { default as React, useEffect, useState } from 'react';
+import { default as React, useState } from 'react';
 import LogInFeature from '../../auth/components/LogInFeature';
 import SignUpFeature from '../../auth/components/SignUpFeature';
 import { auth } from '../../database/firebase';
@@ -9,7 +9,7 @@ import jgramLogo from '../../jgramLogo.png';
 import PropTypes from 'prop-types';
 
 Header.propTypes = {
-    displayUsername: PropTypes.func,
+    user: PropTypes.object,
 };
 
 const useStyles = makeStyles(theme => ({
@@ -68,12 +68,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Header(props) {
+function Header({user = {}}) {
     const classes = useStyles();
     const [signUp, setSignUp] = useState(false);
     const [logIn, setLogIn] = useState(false);
-    const [user, setUser] = useState(null);
-    const [username, setUsername] = useState('');
 
     // const [anchorEl, setAnchorEl] = useState(null);
     // const open = Boolean(anchorEl);
@@ -99,32 +97,8 @@ function Header(props) {
     };
 
     const handleLogInClose = () => {
-        const {displayUsername} = props;
-        if (displayUsername) {
-            displayUsername(username);
-        }
-
         setLogIn(false);
     };
-    
-    // Log in or Sign up
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                // If user log in
-                setUser(authUser);
-                setUsername(authUser.displayName);
-                console.log(username);
-            } else {
-                // If user log out
-                setUser(null);
-            }
-        });
-
-        return () => {
-            unsubscribe();
-        }
-    }, [user, username]);
 
     return (
         <Box className={classes.root}>

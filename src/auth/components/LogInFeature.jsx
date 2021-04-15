@@ -55,17 +55,6 @@ function LogInFeature(props) {
         e.preventDefault();
 
         auth.signInWithEmailAndPassword(email, password)
-            // .then((email) => {
-            //     db.collection('users').onSnapshot(snapshot => {
-            //         snapshot.docs.map(doc => ({
-            //             id: doc.id,
-            //             email: doc.email,
-            //             username: doc.username
-            //         }));
-            //         console.log(email);
-            //         // return setUsername(username);
-            //     })
-            // })
             .catch((err) =>  alert('Error message: ', err));
         
         const {closeModal} = props;

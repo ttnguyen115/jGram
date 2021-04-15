@@ -1,6 +1,6 @@
 import { Box, Container, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { db } from '../../../database/firebase';
+import { auth, db } from '../../../database/firebase';
 import Header from '../../Header';
 import UploadPost from '../../UploadFeature/UploadPost';
 import PostList from '../components/PostList';
@@ -31,11 +31,28 @@ function HomePage(props) {
     const classes = useStyles();
     const [loading, setLoading] = useState(true);
     const [postList, setPostList] = useState([]);
+    const [user, setUser] = useState(null);
     const [username, setUsername] = useState('');
 
-    const handleDisplayUsername = (name) => {
-        setUsername(name);
-    };
+     // Log in or Sign up
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+            if (authUser) {
+                // If user log in
+                setUser(authUser);
+                setUsername(authUser.displayName);
+                console.log(username);
+            } else {
+                // If user log out
+                setUser(null);
+                setUsername('');
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        }
+    }, [user, username]);
 
     // Fetch realtime data from Firebase officially
     useEffect(() => {
@@ -57,7 +74,7 @@ function HomePage(props) {
 
     return (
         <Box className={classes.root}>
-            <Header className={classes.header} displayUsername={handleDisplayUsername} />
+            <Header className={classes.header} user={user} />
             <UploadPost username={username} /> 
             <Container className={classes.container} maxWidth="md">
 
