@@ -13,6 +13,16 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         textAlign: 'center',
     },
+
+    noti: {
+        position: 'fixed',
+        bottom: 0,
+        width: '100%',
+        backgroundColor: 'red',
+        color: '#fff',
+        textAlign: 'center',
+        zIndex: 100,
+    },
     
     container: {
         width: '100%',
@@ -36,22 +46,20 @@ function HomePage(props) {
 
      // Log in or Sign up
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((authUser) => {
-            if (authUser) {
-                // If user log in
-                setUser(authUser);
-                setUsername(authUser.displayName);
-                console.log(username);
-            } else {
-                // If user log out
-                setUser(null);
-                setUsername('');
-            }
-        });
-
-        return () => {
-            unsubscribe();
-        }
+        (async () => { 
+            auth.onAuthStateChanged((authUser) => {
+                if (authUser) {
+                    // If user log in
+                    setUser(authUser);
+                    setUsername(authUser.displayName);
+                    console.log(username);
+                } else {
+                    // If user log out
+                    setUser(null);
+                    setUsername('');
+                }
+            })
+        })();
     }, [user, username]);
 
     // Fetch realtime data from Firebase officially
@@ -75,7 +83,11 @@ function HomePage(props) {
     return (
         <Box className={classes.root}>
             <Header className={classes.header} user={user} />
-            <UploadPost username={username} /> 
+            {user ? (
+                <UploadPost username={username} /> 
+            ) : (
+                <Box className={classes.noti}>You need to log in before upload!</Box>
+            )}
             <Container className={classes.container} maxWidth="md">
 
                 {loading ? <PostSkeleton /> : <PostList data={postList}/> }

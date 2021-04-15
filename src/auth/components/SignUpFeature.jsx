@@ -64,7 +64,7 @@ function SignUpFeature(props) {
 
                 return authUser.user.updateProfile({
                     displayName: username,
-                })
+                });
             })
             .catch(err => alert('Error message: ', err));
 

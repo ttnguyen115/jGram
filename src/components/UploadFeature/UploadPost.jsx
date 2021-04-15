@@ -1,4 +1,4 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { Box, Button, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import firebase, { storage, db } from '../../database/firebase';
 import PropTypes from 'prop-types';
@@ -15,16 +15,32 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#000',
         color: '#fff',
         textAlign: 'center',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
         zIndex: '100',
-    },
+        height: '50px',
 
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+    },
+    
     uploadBtn: {
         color: 'white',
         border: '1px solid white',
     },
+
+    progress: {
+        width: '70%',
+    },
+    
+    input: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+    },
+
+    files: {
+        display: 'flex',
+        flexDirection: 'column',
+    }
 }));
 
 function UploadPost({username}) {
@@ -73,6 +89,9 @@ function UploadPost({username}) {
                                 username: username,
                             })
 
+                            setProgress(0);
+                            setCaption('');
+                            setImageUrl('');
                         })
             }
         );
@@ -80,13 +99,18 @@ function UploadPost({username}) {
 
     return (
         <div className={classes.root}>
-            <input type="text" placeholder="Enter your caption here..." onChange={e => setCaption(e.target.value)} />
-            <input type="file" onChange={handleChange} />
-            <div>{progress}</div>
+            <progress max="100" value={progress} className={classes.progress} />
 
-            <Button className={classes.uploadBtn} onClick={handleUpload}>
-                Upload
-            </Button>
+            <Box className={classes.input}>
+                <Box className={classes.files}>
+                    <input type="text" placeholder="Enter your caption here..." onChange={e => setCaption(e.target.value)} />
+                    <input type="file" onChange={handleChange} />
+                </Box>
+
+                <Button className={classes.uploadBtn} onClick={handleUpload}>
+                    Upload
+                </Button>
+            </Box>
         </div>
     );
 }

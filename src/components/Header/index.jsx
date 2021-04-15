@@ -1,12 +1,12 @@
 import { Button, InputBase, makeStyles, Modal } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
+import PropTypes from 'prop-types';
 import { default as React, useState } from 'react';
 import LogInFeature from '../../auth/components/LogInFeature';
 import SignUpFeature from '../../auth/components/SignUpFeature';
 import { auth } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
-import PropTypes from 'prop-types';
 
 Header.propTypes = {
     user: PropTypes.object,
@@ -102,7 +102,7 @@ function Header({user = {}}) {
 
     return (
         <Box className={classes.root}>
-            <a href="http://localhost:3000/"><img src={jgramLogo} alt="jgramLogo" className={classes.img} /></a>
+            <a href="/"><img src={jgramLogo} alt="jgramLogo" className={classes.img} /></a>
 
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
