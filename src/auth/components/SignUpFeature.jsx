@@ -1,7 +1,7 @@
 import { Box, Button, Input, makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { auth, db } from '../../database/firebase';
+import { auth, FieldValue } from '../../database/firebase';
 import jgramLogo from '../../jgramLogo.png';
 
 SignUpFeature.propTypes = {
@@ -57,7 +57,7 @@ function SignUpFeature(props) {
 
         auth.createUserWithEmailAndPassword(email, password)
             .then((authUser) => {
-                db.collection('users').add({
+                FieldValue.collection('users').add({
                     email: email,
                     username: username,
                 });

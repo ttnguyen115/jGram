@@ -1,6 +1,6 @@
 import { Box, Container, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { auth, db } from '../../../database/firebase';
+import { auth, FieldValue } from '../../../database/firebase';
 import Header from '../../Header';
 import UploadPost from '../../UploadFeature/UploadPost';
 import PostList from '../components/PostList';
@@ -10,6 +10,9 @@ HomePage.propTypes = {};
 
 const useStyles = makeStyles(theme => ({
     root: {
+        margin: 0,
+        padding: 0,
+        boxSizing: 'border-box',
         flexGrow: 1,
         textAlign: 'center',
     },
@@ -66,7 +69,7 @@ function HomePage(props) {
     useEffect(() => {
         (async () => {
             try {
-                db.collection('posts').onSnapshot(snapshot => {
+                FieldValue.collection('posts').onSnapshot(snapshot => {
                     setPostList(snapshot.docs.map(doc => ({
                         id: doc.id , 
                         post: doc.data()

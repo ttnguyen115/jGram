@@ -1,26 +1,24 @@
-// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// const firebaseConfig = {
-//     
-// };
+import Firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';  
 
-// export default firebaseConfig;
-
-import firebase from 'firebase';
-
-const firebaseApp = firebase.initializeApp({
+const config = {
     apiKey: "AIzaSyD9tl_zR3jilA9vKcMzV6nY6tZi97iLmJg",
     authDomain: "jgram-ad357.firebaseapp.com",
     databaseURL: "https://jgram-ad357-default-rtdb.firebaseio.com",
     projectId: "jgram-ad357",
     storageBucket: "jgram-ad357.appspot.com",
     messagingSenderId: "930672279615",
-    appId: "1:930672279615:web:3f52eb9fd3759fc7fc788a",
-    measurementId: "G-C50C0WVFHN",
-});
+    appId: "1:930672279615:web:7c09270fc111890ffc788a",
+    measurementId: "G-6W3Y14NYJN"
+};
 
-const db = firebaseApp.firestore();
-const auth = firebaseApp.auth();
-const storage = firebaseApp.storage();
+const firebase = Firebase.initializeApp(config);
 
-export {db, auth, storage};
-export default firebase;
+const { FieldValue } = Firebase.firestore; // db
+const auth = Firebase.auth;
+const storage = Firebase.storage;
+
+export { firebase, FieldValue }; 
+export { auth, storage};
+// export default firebase;

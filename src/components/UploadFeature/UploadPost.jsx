@@ -1,6 +1,6 @@
 import { Box, Button, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
-import firebase, { storage, db } from '../../database/firebase';
+import { firebase, storage, FieldValue } from '../../database/firebase';
 import PropTypes from 'prop-types';
 
 UploadPost.propTypes = {
@@ -82,7 +82,7 @@ function UploadPost({username}) {
                         .getDownloadURL()
                         .then(url => {
                             // post image inside db
-                            db.collection('posts').add({
+                            FieldValue.collection('posts').add({
                                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                                 caption: caption,
                                 imageUrl: url,
