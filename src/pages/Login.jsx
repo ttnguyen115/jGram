@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import FirebaseContext from '../context/firebase';
 import loginPicture from '../assets/images/avatars/iphone-with-profile.jpg';
 import { Link } from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,22 +13,35 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         height: '100%',
         width: '100%',
+        margin: '0 auto',
     },
 
     img: {
-        width: '30%',
-        maxWidth: '50%',
-        // border: '1px solid #cecece',
+        width: '40%',
+        maxWidth: '30%',
         borderRadius: '10px',
+
+        [theme.breakpoints.down('xs')]: {
+            display: 'none',
+        }
     },
 
     form_container: {
-        width: '35%',
-    },
+        width: '40%',
+        maxWidth: '30%',
 
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+        },
+    },
+    
     form: {
         textAlign: 'center',
         padding: '20px',
+
+        [theme.breakpoints.down('xs')]: {
+            width: '100%',
+        },
 
         '& > img' : {
             width: '30%',
@@ -44,20 +58,40 @@ const useStyles = makeStyles(theme => ({
         '& > form > input' : {
             margin: '5px 0',
             width: '70%',
-            padding: '15px',
+            padding: '.5em',
         },
 
         '& > form > button' : {
             margin: '5px 0',
             width: '75%',
-            padding: '15px',
+            padding: '.5em',
         },
     },
 
     crossline: {
         height: '30%',
-        borderLeft: '1px solid #7e7e7e'
+        borderLeft: '1px solid #7e7e7e',
+
+        [theme.breakpoints.down('xs')]: {
+            display: 'none',
+        }
     },
+
+    error: {
+        color: 'red',
+        fontSize: '13px',
+
+    },
+
+    signup: {
+        textDecoration: 'none',
+        fontSize: '20px',
+
+    },
+
+    logo: {
+        width: '200%',
+    }
 }));
 
 function Login(props) {
@@ -71,12 +105,17 @@ function Login(props) {
      
     const isInvalid = password === '' || email === ''; 
 
-    const handleLogin = () => {
-        
-    };
-
-    const handleSubmitClick = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
+
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+            history.push(ROUTES.DASHBOARD);
+        } catch (error) {
+            setEmail('');
+            setPassword('');
+            setError(error.message);
+        }
     };
 
     useEffect(() => {
@@ -91,9 +130,9 @@ function Login(props) {
 
             <Box  className={classes.form_container}>
                 <Paper elevation={2} className={classes.form}>
-                    <img src="../jgramLogo.png" alt="logo-form"/>
+                    <img src="../jgramLogo.png" alt="logo-form" className={classes.logo}/>
 
-                    {error && <Typography>{error}</Typography>}
+                    {error && <Typography className={classes.error}>{error}</Typography>}
 
                     <form onSubmit={handleLogin} method="POST" className={classes.form_detail}> 
                         <input 
@@ -113,7 +152,6 @@ function Login(props) {
                         <button
                             disabled={isInvalid}
                             type="submit"
-                            onClick={handleSubmitClick}
                         >
                             Log In
                         </button>
@@ -123,7 +161,7 @@ function Login(props) {
 
                     <Box>
                         <Typography>Don't have an account</Typography>
-                        <Link to="/signup">
+                        <Link to="/signup" className={classes.signup}>
                             Sign Up
                         </Link>
                     </Box>
