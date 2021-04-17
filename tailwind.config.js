@@ -1,4 +1,6 @@
 module.exports = {
+    // plugins: [require('tailwindcss'), require('autoprefixer')],
+    
     future: {
         removeDeprecatedGapUtilities: true,
     },
@@ -6,7 +8,7 @@ module.exports = {
     theme: {
         colors: {
             fill: (theme) => ({
-                red: theme('colors.red.primary'),
+                red: theme('colors.red.primary')
             }),
 
             white: '#fff',

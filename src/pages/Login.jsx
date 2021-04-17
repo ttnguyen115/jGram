@@ -45,7 +45,7 @@ function Login(props) {
 
                 {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
 
-                <form onSubmit={handleLogin} method="POST" className=""> 
+                <form onSubmit={handleLogin} method="POST"> 
                     <input 
                         aria-label="Enter your email address"
                         type="text"
