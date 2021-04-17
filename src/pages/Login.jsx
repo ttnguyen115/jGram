@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import loginPicture from '../assets/images/avatars/iphone-with-profile.jpg';
 import * as ROUTES from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 
@@ -35,12 +34,12 @@ function Login(props) {
     return (
         <div className="container flex mx-auto max-w-screen-md items-center h-screen">
             <div className="flex w-3/5">
-                <img className="max-w-full" src={loginPicture} alt="ip-social"/>
+                <img className="max-w-full" src="/images/iphone-with-profile.jpg" alt="ip-social"/>
             </div>
 
             <div className="flex flex-col w-2/5 bg-white items-center rounded p-4 border border-gray-primary mb-4">
                 <h1 className="flex justify-center w-full">
-                    <img src="../jgramLogo.png" alt="logo-form" className="mt-2 w-6/12 mb-4"/>
+                    <img src="/images/jgramLogo.png" alt="logo-form" className="mt-2 w-6/12 mb-4"/>
                 </h1>
 
                 {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
