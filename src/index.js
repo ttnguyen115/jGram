@@ -6,6 +6,7 @@ import App from './App';
 import store from './redux/store';
 import FirebaseContext from './context/firebase';
 import { firebase, FieldValue } from './database/firebase';
+import './styles/app.css';  
 
 
 ReactDOM.render(
