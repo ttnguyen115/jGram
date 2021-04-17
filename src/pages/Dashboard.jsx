@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/Sidebar/index';
 import Timeline from '../components/Timeline';
 
 function Dashboard(props) {

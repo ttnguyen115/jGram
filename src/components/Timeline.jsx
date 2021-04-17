@@ -1,11 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 
-Timeline.propTypes = {};
 
 function Timeline(props) {
     return (
-        <div>
+        <div className="container col-span-2">
             I am the timeline
         </div>
     );

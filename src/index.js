@@ -4,6 +4,7 @@ import App from './App';
 import FirebaseContext from './context/firebase';
 import { FieldValue, firebase } from './database/firebase';
 import './styles/app.css';
+import './wdyr.js';
 
 
 ReactDOM.render(
