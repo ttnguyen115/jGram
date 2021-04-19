@@ -19,7 +19,7 @@ function Comments({ docId, comments: allComments, posted, commentInput }) {
             <p className="text-gray-base uppercase text-xs">{formatDistance(posted, new Date())} ago</p>
 
             { comments.length >= 3 && (
-                <p className="text-sm text-gray-base mb-1 cursor-pointer">View all {comments.length} comments...</p>
+                <p className="text-sm text-gray-base mb-1 cursor-pointer">View all comments...</p>
             )}
 
             { comments.slice(0, 3).map(item => (
