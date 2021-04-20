@@ -5,7 +5,7 @@ import * as ROUTES from '../constants/routes';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+// import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import UploadPost from './upload';
 
 function Header(props) {
