@@ -5,21 +5,26 @@ import FirebaseContext from '../../context/firebase';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { useHistory } from 'react-router';
 
 Actions.propTypes = {
     docId: PropTypes.string.isRequired,
     totalLikes: PropTypes.number.isRequired,
     likedPhoto: PropTypes.bool.isRequired,
     handleFocus: PropTypes.func.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    imageName: PropTypes.string.isRequired,
 };
 
-function Actions({ docId, totalLikes, likedPhoto, handleFocus }) {
+function Actions({ docId, totalLikes, likedPhoto, handleFocus, imageSrc, imageName }) {
     const {
         user: { uid: userId = '' }
     } = useContext(UserContext);
     const [toggleLiked, setToggleLiked] = useState(likedPhoto);
     const [likes, setLikes] = useState(totalLikes);
     const { firebase, FieldValue } = useContext(FirebaseContext);
+    const history = useHistory();
 
     const handleToggleLiked = async () => {
         setToggleLiked(toggleLiked => !toggleLiked);
@@ -35,6 +40,21 @@ function Actions({ docId, totalLikes, likedPhoto, handleFocus }) {
         setLikes(likes => (toggleLiked ? likes - 1 : likes + 1));
     };
 
+    const handleDelete = () => {
+        firebase
+            .storage()
+            .ref(`images/${imageName}`)
+            .delete(imageName);
+        
+        firebase
+            .firestore()
+            .collection('photos')
+            .doc(docId)
+            .delete()
+
+        history.push('/login');
+    }
+
     return (
         <div className="flex justify-between p-4">
             <div className="flex">
@@ -47,12 +67,17 @@ function Actions({ docId, totalLikes, likedPhoto, handleFocus }) {
                 ) : (
                     <FavoriteBorderIcon 
                         className="cursor-pointer mr-5"
-                        onClick={handleToggleLiked} 
+                        
                     />
                 )}
 
                 <ChatBubbleOutlineIcon 
                     onClick={handleFocus}
+                    className="cursor-pointer mr-5" 
+                />
+
+                <DeleteIcon
+                    onClick={handleDelete}
                     className="cursor-pointer mr-5" 
                 />
             </div>

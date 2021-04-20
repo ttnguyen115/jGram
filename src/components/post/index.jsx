@@ -15,7 +15,8 @@ Post.propTypes = {
         userLikedPhoto: PropTypes.bool.isRequired,
         likes: PropTypes.array.isRequired,
         comments: PropTypes.array.isRequired,
-        dateCreated: PropTypes.number.isRequired
+        dateCreated: PropTypes.number.isRequired,
+        imageName: PropTypes.string.isRequired,
     }), 
 };
 
@@ -35,6 +36,8 @@ function Post({content}) {
                 totalLikes={content.likes.length} 
                 likedPhoto={content.userLikedPhoto}
                 handleFocus={handleFocus}
+                imageSrc={content.imageSrc}
+                imageName={content.imageName}
             />
             <Footer caption={content.caption} username={content.username} />
             <Comments docId={content.docId} comments={content.comments} posted={content.dateCreated} commentInput={commentInput} />

@@ -49,6 +49,7 @@ function UploadPost(props) {
                             .firestore()
                             .collection('photos')
                             .add({
+                                imageName: imageSrc.name,
                                 dateCreated: Date.now(),
                                 caption: caption,
                                 imageSrc: src,
