@@ -5,6 +5,8 @@ import * as ROUTES from '../constants/routes';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import UploadPost from './upload';
 
 function Header(props) {
     const { firebase } = useContext(FirebaseContext);
@@ -28,6 +30,9 @@ function Header(props) {
                                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                                     <HomeIcon />
                                 </Link>
+
+                                {/* <AddCircleOutlineIcon /> */}
+                                <UploadPost user={user} />
 
                                 <button
                                     type="button"

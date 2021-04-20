@@ -113,6 +113,36 @@ export async function getPhotos( userId, following) {
     return photosWithUserDetails;
 }
 
+export async function getMyselfPhotos(userId) {
+    const result =  await firebase
+        .firestore()
+        .collection('photos')
+        .where('userId', '==', userId)
+        .get();
+
+    const myPhotos = result.docs.map(photo => ({
+        ...photo.data(),
+        docId: photo.id
+    }));
+
+    const photosWithUserDetails = await Promise.all(
+        myPhotos.map(async (photo) => {
+            let userLikedPhoto = false;
+
+            if (photo.likes.includes(userId)) {
+                userLikedPhoto = true;
+            }
+
+            const user = await getUserByUserId(photo.userId);
+            const { username } = user[0];
+
+            return { username, ...photo, userLikedPhoto };
+        })
+    )
+
+    return photosWithUserDetails;
+}
+
 export async function getUserPhotosByUsername(username) { 
     const [user] = await getUserByUsername(username);
     
