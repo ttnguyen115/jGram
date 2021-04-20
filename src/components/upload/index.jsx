@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 function UploadPost(props) {
     const { user } = useContext(UserContext);
@@ -65,15 +66,31 @@ function UploadPost(props) {
     }
 
     return (
-        <div className="hidden sm:flex flex-col pt-20 pb-10 w-3/5 mx-auto">
-            <progress className="w-full" value={progress} max="100" />
+        <div className="flex flex-col pt-20 pb-2 w-3/5 mx-auto">
+            <progress className="w-full h-1 rounded" value={progress} max="100" />
 
             <div className="flex justify-center flex-col">
-                <input type="text" placeholder="Enter a caption" value={caption} onChange={e => setCaption(e.target.value)} />
-                <input type="file" onChange={handleChange} />
-                <Button variant="contained" color="primary" onClick={handleUpload}>
-                    Upload
-                </Button>
+                <input className="border-2 border-gray-100 border rounded" type="text" placeholder="Enter a caption" value={caption} onChange={e => setCaption(e.target.value)} />
+                
+                <div className="flex justify-center mt-1">
+                    {/* <input type="file" onChange={handleChange} /> */}
+                    <Button
+                        variant="contained"
+                        color="default"
+                        startIcon={<CloudUploadIcon />}
+                    >
+                        Upload
+                    </Button>
+                    
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        onClick={handleUpload}
+                        className="w-1/4 z-1"
+                    >
+                        Share
+                    </Button>
+                </div>
             </div>
 
         </div>

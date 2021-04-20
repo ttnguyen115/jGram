@@ -1,19 +1,17 @@
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import HomeIcon from '@material-ui/icons/Home';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
-import * as ROUTES from '../constants/routes';
-import { Link } from 'react-router-dom';
-import HomeIcon from '@material-ui/icons/Home';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-// import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-// import UploadPost from './upload';
 
 function Header(props) {
     const { firebase } = useContext(FirebaseContext);
     const { user } = useContext(UserContext);
 
     return (
-        <header className="h-16 bg-white border-b border-gray-primary mb-8 fixed w-full">
+        <header className="h-16 bg-white border-b border-gray-primary mb-8 fixed w-full z-10">
             <div className="container mx-auto max-w-screen-lg h-full">
                 <div className="flex justify-between h-full">
                     <div className="text-gray-700 text-center flex items-center align-items cursor-pointer w-2/12 sm:w-1/12">
@@ -30,10 +28,7 @@ function Header(props) {
                                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                                     <HomeIcon />
                                 </Link>
-
-                                {/* <AddCircleOutlineIcon /> */}
-                                {/* <UploadPost user={user} /> */}
-
+                                
                                 <button
                                     type="button"
                                     title="Sign Out"

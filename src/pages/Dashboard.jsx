@@ -14,7 +14,7 @@ function Dashboard(props) {
         <div className="bg-gray-background">
             <Header />
             <UploadPost />
-            <div className="flex md:grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg pt-20 sm:pt-0">
+            <div className="flex md:grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
                 <Timeline />
                 <Sidebar /> 
             </div>
