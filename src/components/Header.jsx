@@ -1,7 +1,7 @@
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
@@ -9,6 +9,12 @@ import UserContext from '../context/user';
 function Header(props) {
     const { firebase } = useContext(FirebaseContext);
     const { user } = useContext(UserContext);
+    const history = useHistory();
+
+    const handleSignOut = () => {
+        firebase.auth().signOut();
+        history.push('/');
+    }
 
     return (
         <header className="h-16 bg-white border-b border-gray-primary mb-8 fixed w-full z-10">
@@ -32,7 +38,7 @@ function Header(props) {
                                 <button
                                     type="button"
                                     title="Sign Out"
-                                    onClick={() => firebase.auth().signOut()}
+                                    onClick={handleSignOut}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
                                             firebase.auth().signOut();

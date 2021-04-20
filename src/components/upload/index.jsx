@@ -89,7 +89,7 @@ function UploadPost(props) {
                         onClick={handleUpload}
                         className="w-1/4 z-1"
                     >
-                        Share
+                        Upload
                     </Button>
                 </div>
             </div>
