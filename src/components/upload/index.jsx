@@ -1,13 +1,10 @@
-import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
+import React, { useContext, useState } from 'react';
 import FirebaseContext from '../../context/firebase';
+import UserContext from '../../context/user';
 
-UploadPost.propTypes = {
-    user: PropTypes.object.isRequired,
-};
-
-function UploadPost({user}) {
+function UploadPost(props) {
+    const { user } = useContext(UserContext);
     const { firebase } = useContext(FirebaseContext);
     const [imageSrc, setImageSrc] = useState('');
     const [progress, setProgress] = useState(0);
@@ -68,10 +65,10 @@ function UploadPost({user}) {
     }
 
     return (
-        <div className="flex flex-col ">
+        <div className="hidden sm:flex flex-col pt-20 pb-10 w-3/5 mx-auto">
             <progress className="w-full" value={progress} max="100" />
 
-            <div className="flex">
+            <div className="flex justify-center flex-col">
                 <input type="text" placeholder="Enter a caption" value={caption} onChange={e => setCaption(e.target.value)} />
                 <input type="file" onChange={handleChange} />
                 <Button variant="contained" color="primary" onClick={handleUpload}>
