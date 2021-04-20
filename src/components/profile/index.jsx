@@ -32,6 +32,7 @@ function UserProfile({ user }) {
         }
 
         getProfileInfoAndPhotos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user.username]);
 
     return (
