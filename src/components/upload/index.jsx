@@ -1,8 +1,10 @@
 import { Button } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import FirebaseContext from '../../context/firebase';
 import UserContext from '../../context/user';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 function UploadPost(props) {
     const { user } = useContext(UserContext);
@@ -10,6 +12,7 @@ function UploadPost(props) {
     const [imageSrc, setImageSrc] = useState('');
     const [progress, setProgress] = useState(0);
     const [caption, setCaption] = useState('');
+    const history = useHistory();
 
     const handleChange = (e) => {
         if (e.target.files[0]) {
@@ -57,9 +60,7 @@ function UploadPost(props) {
                                 userLongitude: '74.0060°',
                             })
 
-                        setProgress(0);
-                        setCaption('');
-                        setImageSrc('');
+                        history.push('/login');
                     })
             }
         );
@@ -74,13 +75,12 @@ function UploadPost(props) {
                 
                 <div className="flex justify-center mt-1">
                     {/* <input type="file" onChange={handleChange} /> */}
-                    <Button
-                        variant="contained"
-                        color="default"
-                        startIcon={<CloudUploadIcon />}
-                    >
-                        Upload
-                    </Button>
+                    <input accept="image/*" className="hidden" id="icon-button-file" type="file" onChange={handleChange} />
+                    <label htmlFor="icon-button-file">
+                        <IconButton color="primary" aria-label="upload picture" component="span">
+                            <PhotoCamera />
+                        </IconButton>
+                    </label>
                     
                     <Button 
                         variant="contained" 
