@@ -26,7 +26,7 @@ function Actions({
     username 
 }) {
     const {
-        user: { uid: userId = '' }
+        user: { uid: userId = '', displayName: userName = '' }
     } = useContext(UserContext);
     const [toggleLiked, setToggleLiked] = useState(likedPhoto);
     const [likes, setLikes] = useState(totalLikes);
@@ -34,6 +34,7 @@ function Actions({
     const history = useHistory();
 
     const handleToggleLiked = async () => {
+        console.log(userName);
         setToggleLiked(toggleLiked => !toggleLiked);
 
         await firebase
@@ -83,11 +84,12 @@ function Actions({
                     className="cursor-pointer mr-5" 
                 />
 
-                {/* {user} */}
+                {userName === username ? (
                     <DeleteIcon
                         onClick={handleDelete}
                         className="cursor-pointer mr-5" 
                     />
+                ) : null}
           
             </div>
 
