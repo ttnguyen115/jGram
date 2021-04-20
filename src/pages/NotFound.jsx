@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Header from '../components/Header';
 
 function NotFound(props) {
     useEffect(() => {
@@ -7,7 +8,9 @@ function NotFound(props) {
 
     return (
         <div className="bg-gray-background">
-            <div className="mx-auth max-w-large-lg">
+            <Header />
+
+            <div className="mx-auth max-w-large-lg pt-20">
                 <p className="text-center text-2xl">Page Not Found</p>
             </div>
         </div>

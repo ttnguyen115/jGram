@@ -17,12 +17,10 @@ export async function getUserByUsername(username) {
         .where('username', '==', username)
         .get();
 
-    const user = result.docs.map(item => ({
+    return result.docs.map(item => ({
         ...item.data(),
         docId: item.id,
     }));
-
-    return user.length > 0 ? user : false;
 }
 
 // get user from firestore where userId === userId (passed from the auth)
@@ -115,7 +113,7 @@ export async function getPhotos( userId, following) {
     return photosWithUserDetails;
 }
 
-export async function getUserPhotosByUsername(username) {
+export async function getUserPhotosByUsername(username) { 
     const [user] = await getUserByUsername(username);
     
     const result =  await firebase
@@ -144,4 +142,12 @@ export async function isUserFollowingProfile(loggedInUserUsername, profileUserId
     }))
 
     return res.userId;
+}
+
+export async function toggleFollow(isFollowingProfile, activeUserDocId, profileDocId, profileUserId, followingUserId ) {
+    // param 1: my doc id
+    // param 2: user id of whom I request to follow
+    // param 3: is the user following this profile?
+    await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
+    await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
 }

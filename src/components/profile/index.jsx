@@ -21,7 +21,7 @@ function UserProfile({ user }) {
     const initialState = {
         profile: {},
         photosCollection: [],
-        followersCount: 0
+        followerCount: 0
     };
     const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(reducer, initialState); 
 
@@ -40,7 +40,7 @@ function UserProfile({ user }) {
                 photosCount={photosCollection ? photosCollection.length : 0}
                 profile={profile}
                 followerCount={followerCount}
-                setFollowersCount={dispatch}
+                setFollowerCount={dispatch}
             />
             <Photos photos={photosCollection} />
         </>
