@@ -56,15 +56,15 @@ function Header({
     }, [user?.username, profileUserId]);
 
     return (
-        <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
+        <div className="flex flex-col md:grid md:grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
             <div className="container flex justify-center">
                 {user.username && (
-                    <img className="rounded-full h-40 w-40 flex" src={`/images/avatars/${profileUsername}.jpg`} alt={profileUsername} />
+                    <img className="rounded-full h-20 w-20 md:h-40 md:w-40 flex" src={`/images/avatars/${profileUsername}.jpg`} alt={profileUsername} />
                 )}
             </div>
 
             <div className="flex items-center justify-center flex-col col-span-2">
-                <div className="container flex items-center">
+                <div className="container flex items-center justify-center">
                     <p className="text-2xl mr-4">{profileUsername}</p>
 
                     {activeBtnFollow && (
@@ -78,21 +78,21 @@ function Header({
                     )}
                 </div>
 
-                <div className="container flex mt-4">
+                <div className="container flex mt-4 justify-around">
                     {!followers || !following ? (
                         <Skeleton count={1} width={677} height={24} />
                     ) : (
                         <>
-                            <p className="mr-10">
+                            <p className="">
                                 <span className="font-bold">{photosCount}</span>
                                 {` `} photos
                             </p>
 
-                            <p className="mr-10">
+                            <p className="">
                                 <span className="font-bold">{followerCount}</span>
                                 {` `} {followerCount === 1 ? `follower` : `followers`}
                             </p> 
-                            <p className="mr-10">
+                            <p className="">
                                 <span className="font-bold">{following?.length}</span>
                                 {` `} following
                             </p>
@@ -100,7 +100,7 @@ function Header({
                     )}
                 </div>
 
-                <div className="container mt-4">
+                <div className="container mt-4 text-center">
                     <div className="font-medium">{!fullName ? <Skeleton count={1} height={24} /> : fullName }</div>
                 </div>
             </div>
