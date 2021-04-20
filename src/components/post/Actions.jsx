@@ -13,11 +13,18 @@ Actions.propTypes = {
     totalLikes: PropTypes.number.isRequired,
     likedPhoto: PropTypes.bool.isRequired,
     handleFocus: PropTypes.func.isRequired,
-    imageSrc: PropTypes.string.isRequired,
     imageName: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
 };
 
-function Actions({ docId, totalLikes, likedPhoto, handleFocus, imageSrc, imageName }) {
+function Actions({ 
+    docId, 
+    totalLikes, 
+    likedPhoto, 
+    handleFocus, 
+    imageName, 
+    username 
+}) {
     const {
         user: { uid: userId = '' }
     } = useContext(UserContext);
@@ -67,7 +74,7 @@ function Actions({ docId, totalLikes, likedPhoto, handleFocus, imageSrc, imageNa
                 ) : (
                     <FavoriteBorderIcon 
                         className="cursor-pointer mr-5"
-                        
+                        onClick={handleToggleLiked} 
                     />
                 )}
 
@@ -76,10 +83,12 @@ function Actions({ docId, totalLikes, likedPhoto, handleFocus, imageSrc, imageNa
                     className="cursor-pointer mr-5" 
                 />
 
-                <DeleteIcon
-                    onClick={handleDelete}
-                    className="cursor-pointer mr-5" 
-                />
+                {/* {user} */}
+                    <DeleteIcon
+                        onClick={handleDelete}
+                        className="cursor-pointer mr-5" 
+                    />
+          
             </div>
 
             <div className="p-4 py-0">
