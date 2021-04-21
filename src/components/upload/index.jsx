@@ -93,7 +93,6 @@ function UploadPost(props) {
                     </Button>
                 </div>
             </div>
-
         </div>
     );
 }
